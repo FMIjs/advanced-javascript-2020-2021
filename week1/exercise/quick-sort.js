@@ -21,7 +21,6 @@ var quickSort = function (arr) {
   }
 
   var sort = function (lIdx, rIdx) {
-    console.log(arr);
     if (lIdx >= rIdx) { return; }
     var pivotIdx = partition(lIdx, rIdx);
     sort(lIdx, pivotIdx); // sort left
