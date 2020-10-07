@@ -1,5 +1,3 @@
-const { receiveMessageOnPort } = require("worker_threads");
-
 var quickSort = function (arr) {
   var partition = function (lIdx, rIdx) {
     var pivot = arr[lIdx];
