@@ -1,4 +1,5 @@
 # Упражнение 1
+## 07.10.20
 
 1. Напишете реализация на [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
 
