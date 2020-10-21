@@ -38,9 +38,7 @@ p3d.print();
 
 // Object.assign - 'слива два обекта'
 
-
 // Point.prototype = Object.create(pproto)
-
 
 function Parent() { 
 
@@ -104,3 +102,6 @@ e) Inherit
 */
 
 console.log(Object.getOwnPropertyNames(inh));
+
+// при четене на property се движим по прототипната верига
+// при писане - директно създава ново property
