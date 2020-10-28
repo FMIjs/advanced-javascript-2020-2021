@@ -1,5 +1,7 @@
 // var arr = [1, 2, 3, 4];
 
+// const { fstat, fs } = require("fs");
+
 // Array.prototype.avg = function () {
 //   var result = 0;
 //   for (var i = 0; i < this.length; i++) {
@@ -65,13 +67,12 @@
 // console.log(ivan.getAge());
 // // Person.call({}, 'Ivan', 20);
 
-function sumAll() {
-  var args = Array.prototype.slice.call(arguments);
-  return args.reduce(function (acc, currentItem) {
-    return acc + currentItem;
-  }, 0);
-}
+// function sumAll() {
+//   var args = Array.prototype.slice.call(arguments);
+//   return args.reduce(function (acc, currentItem) {
+//     return acc + currentItem;
+//   }, 0);
+// }
 
-var result = sumAll(1, 2, 2, 3, 4, 5, 56);
-console.log(result);
-
+// var result = sumAll(1, 2, 2, 3, 4, 5, 56);
+// console.log(result);
