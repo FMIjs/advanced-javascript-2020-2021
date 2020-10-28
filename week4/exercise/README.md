@@ -6,7 +6,7 @@
 
 Пресметнете успеха на всеки студент, като оценката зависи от оценката и кредитите за съответния предмет.  
 
-```(score = (receives/6) * credits )```
+```(score = (receives/6) * credits)```
 
 Данните за кредити (в credits.txt) са за отличен успех. Данните за студенти са в students, а оценките на даден студент по предмет - в marks.
 
@@ -40,7 +40,7 @@ mathematics literature geography
 
 ### Output file:
 ```json
-    {"name":"Ivan  Ivanov","mathematics":"8.33","literature":"9.17","geography":"8.00"},
-    {"name":"Petko  Petkov","mathematics":"5.83","literature":"6.67","geography":"5.33"},
+    {"name":"Ivan  Ivanov","mathematics":"8.33","literature":"0.00","geography":"8.00"},
+    {"name":"Petko  Petkov","mathematics":"5.83","literature":"6.67","geography":"0.00"},
     {"name":"Alex  Alexandrov","mathematics":"10.00","literature":"10.00","geography":"800"}
 ```
