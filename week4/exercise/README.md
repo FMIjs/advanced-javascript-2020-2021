@@ -40,7 +40,7 @@ mathematics literature geography
 
 ### Output file:
 ```json
-    {"name":"Ivan  Ivanov","mathematics":"8.33","literature":"9.17","geography":"8.00"},
-    {"name":"Petko  Petkov","mathematics":"5.83","literature":"6.67","geography":"5.33"},
-    {"name":"Alex  Alexandrov","mathematics":"10.00","literature":"10.00","geography":"800"}
+    {"name":"Ivan  Ivanov","mathematics":"8.33","literature":"0.00","geography":"8.00"},
+    {"name":"Petko  Petkov","mathematics":"5.83","literature":"6.67","geography":"0.00"},
+    {"name":"Alex  Alexandrov","mathematics":"10.00","literature":"10.00","geography":"8.00"}
 ```
