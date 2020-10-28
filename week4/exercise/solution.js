@@ -8,7 +8,7 @@ function readFile(fname, parser) {
     var data = [
         'Edgar Allan Poe 32322',
         'Proval Provansalov PRovenski 6666',
-        'Yordan Moyat Kolega от"Офиса 342', 
+        'Yordan Moyat Kolega от_Офиса 342', 
     ];
     parser(data);
 }
