@@ -15,7 +15,10 @@ function runWithTimeout(timeout) {
   const ww = new Worker('./_exec.js');
   return new Promise((resolve, reject) => {
     let timeoutId;
-    function res(result) { clearTimeout(timeoutId); resolve(result); };
+    function res(result) {
+      ww.terminate().then(() => console.log('_exec.js worker terminated!'));
+      clearTimeout(timeoutId); resolve(result);
+    };
     ww.on('message', message => res(message));
     ww.on('error', error => res(error));
     timeoutId = setTimeout(() => reject(new Error('Timeout!')), timeout);
