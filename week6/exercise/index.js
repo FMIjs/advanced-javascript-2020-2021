@@ -169,7 +169,7 @@ function createReplaceMachine(replaceTokenMap) {
 
       return char;
     }
-  }
+  };
 }
 
 const machine = createReplaceMachine({
