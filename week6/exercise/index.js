@@ -191,10 +191,7 @@ const replaceTransformStream = new Transform({
     if (chuck === null) { done(null, null); return; }
     const chunkStr = chuck.toString();
     const charArray = chunkStr.split('');
-    const processedArray = charArray.map(char => {
-      const res = machine.processChar(char);
-      return res;
-    });
+    const processedArray = charArray.map(char => machine.processChar(char));
     const processedString = processedArray.join('');
     done(null, processedString);
   }
