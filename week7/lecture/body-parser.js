@@ -6,7 +6,6 @@ function urlencodedMiddleware(req, res, next) {
     req.on('end', function () {
       try {
         const bodyString = body.map(b => b.toString()).join('');
-        throw new Error('BODY PARSER ERROR');
         req.body = bodyString.split('&').reduce((acc, curr) => {
           const [key, value] = curr.split('=');
           acc[key] = decodeURIComponent(value);
