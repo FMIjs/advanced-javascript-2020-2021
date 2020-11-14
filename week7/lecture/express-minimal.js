@@ -59,7 +59,7 @@ User-Agent: curl/7.54.0
 // View - view to the data 
 // Controller - the logic that puts data from the model together so that it is shown in some view
 
-app.post('/subm(o|a)rt', urlencodedMiddleware, (req, res) => {
+app.post('/subm(o|a)rt', /*urlencodedMiddleware,*/(req, res) => {
     // const body = [];
     // req.on("data", (chunk) => {
     //     console.log(chunk);
