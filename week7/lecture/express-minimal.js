@@ -80,7 +80,17 @@ app.use(function (err, req, res, next) {
     res.status(500).end('SERVER ERROR');
 });
 
-
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
-})
+});
+
+// destructuring: 
+// const obj = { arr: [{ a: 1, b: { c: 10 } }] };
+// const { arr: [{ b: { c: abc, d = 'Default Value' } }] } = obj;
+// console.log(abc);
+
+// const obj3 = { a: 1, b: 2, c: 3 }
+
+// destructuring with rest operator for removing properties from object
+// const { c, ...obj2 } = obj3;
+// console.log(obj2);
