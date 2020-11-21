@@ -20,6 +20,18 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__basedir, 'index.html'));
 });
 
+app.get('*', function (req, res) {
+  res.status(404).send('PAGE NOT FOUND!');
+});
+
+app.use(function (err, req, res, next) {
+  if (err.message === 'BAD_REQUEST') {
+    res.status(400).send('BAD REQUEST');
+    return;
+  }
+  res.status(500).send('SERVER ERROR');
+});
+
 db.connect().then(() => {
   app.listen(config.port, function () {
     console.log(`Server is listening on :${config.port}`);

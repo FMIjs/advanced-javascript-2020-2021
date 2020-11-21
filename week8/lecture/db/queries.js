@@ -31,6 +31,8 @@ function handleQuery(collectionName, op, ...rest) {
   });
 }
 
+// in case that the query id is not a mongodb ObjectId
+// update the property value for the object with the converted to ObjectId value
 function fixQueryObjectId(query) {
   if (query._id && !(query._id instanceof mongodb.ObjectId)) {
     query._id = mongodb.ObjectId(query._id);
@@ -38,6 +40,10 @@ function fixQueryObjectId(query) {
   return query;
 }
 
+// in case that the data for the update doesn't have the mongo $set special key
+// (which means override everything inside the object in the db for the given query)
+// we want to add it in order to only update the given fields only and leave everything
+// else as is.
 function fixUpdatedData(data) {
   if (!data['$set']) {
     return { $set: { ...data } };
@@ -47,30 +53,44 @@ function fixUpdatedData(data) {
 
 module.exports.createQueriesForCollection = function (collectionName) {
   const insert = function (item) {
-    return handleQuery(collectionName, 'insert', item);
+    return handleQuery(
+      collectionName,
+      'insert',
+      item
+    );
   };
 
   const get = function (query) {
     query = fixQueryObjectId(query);
-    return handleQuery(collectionName, 'find', query);
+    return handleQuery(
+      collectionName,
+      'find',
+      query
+    );
   };
 
   const remove = function (query) {
     query = fixQueryObjectId(query);
-    return handleQuery(collectionName, 'findOneAndDelete', query);
+    return handleQuery(
+      collectionName,
+      'findOneAndDelete',
+      query
+    );
   }
 
   const update = function (query, updatedData) {
     query = fixQueryObjectId(query);
     updatedData = fixUpdatedData(updatedData);
-    return handleQuery(collectionName, 'findOneAndUpdate', query, updatedData, { returnNewDocument: true });
+    return handleQuery(
+      collectionName,
+      'findOneAndUpdate',
+      query,
+      updatedData,
+      { returnOriginal: false } // return the updated document 
+      //(returnNewDocument exists in mongo shell but not in mongodb nodejs driver)
+    );
   }
 
-  return {
-    insert,
-    get,
-    remove,
-    update
-  }
+  return { insert, get, remove, update };
 };
 
