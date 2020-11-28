@@ -21,23 +21,29 @@ function checkAndExtractUserFieldsMiddlewareFactory({ strict } = { strict: false
   };
 };
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
   userQueries.get({}).then(users => {
-    res.send(users);
+    res.locals.data = users;
+    next();
+    // res.send(users);
   });
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id', function (req, res, next) {
   userQueries.get({ _id: req.params.id }).then(users => {
-    res.send(users);
+    res.locals.data = users;
+    next();
+    // res.send(users);
   });
 });
 
 router.post('/',
   checkAndExtractUserFieldsMiddlewareFactory({ strict: true }),
-  function (req, res) {
+  function (req, res, next) {
     userQueries.insert(req.body).then(user => {
-      res.send(user);
+      res.locals.data = user;
+      next();
+      // res.send(user);
     });
   }
 );
@@ -45,16 +51,20 @@ router.post('/',
 router.put(
   '/:id',
   checkAndExtractUserFieldsMiddlewareFactory({ strict: false }),
-  function (req, res) {
+  function (req, res, next) {
     userQueries.update({ _id: req.params.id }, req.body).then(user => {
-      res.send(user);
+      res.locals.data = user;
+      next();
+      // res.send(user);
     });
   }
 );
 
-router.delete('/:id', function (req, res) {
+router.delete('/:id', function (req, res, next) {
   userQueries.remove({ _id: req.params.id }).then(user => {
-    res.send(user);
+    res.locals.data = user;
+    next();
+    // res.send(user);
   });
 });
 
