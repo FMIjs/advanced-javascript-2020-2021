@@ -37,3 +37,18 @@ var { boom } = undefined;
 const x = 1;
 const y = 5;
 [x, y] = [y, x];
+
+
+
+
+
+
+const req = {}, res = {};
+const middlewares = [];
+
+const next = () => {
+  const nextMiddleware = middlewares.shift();
+  nextMiddleware(req, res, next);
+}
+
+middlewares[0](req, res, next);
