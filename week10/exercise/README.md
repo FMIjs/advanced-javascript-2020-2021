@@ -1,4 +1,4 @@
-# Упражнение 8
+# Упражнение 10
 ## 09.12.20
 
 [Разгледайте решенията на задачите от контролното](https://github.com/FMIjs/advanced-javascript-2020-2021/blob/master/week10/lecture/exam-solutions.js) и преправете функциите:
