@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const api = require('./api');
 const db = require('./db');
+const auth = require('./auth');
 
 const app = express();
 
@@ -16,10 +17,22 @@ app.use(cookieParser());
 
 app.get('/lit-html/*', function (req, res) {
   const reqPath = req.path;
-  res.sendFile(path.join(__basedir, 'node_modules', ...reqPath.split('/')));
+  res.sendFile(path.join(__basedir, 'node_modules', ...reqPath.split('/')), function (err) {
+    if (err) { console.error(err); }
+  });
 });
 
 app.use(express.static(path.join(__basedir, 'static')));
+
+app.post('/login', function (req, res) {
+  const body = req.body;
+  if (body.password !== '123') { return void res.status(401).send({ error: 'Invalid email or password!' }); }
+
+  auth.createToken({ id: 1 }).then(token => {
+    res.cookie('AUTH_COOKIE', token, { httpOnly: true }).end();
+    // res.send({ token });
+  });
+});
 
 api.connect(app, '/api');
 
