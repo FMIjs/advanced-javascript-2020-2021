@@ -15,6 +15,11 @@ const appTemplate = context => html`
 `;
 
 class AppComponent extends HTMLElement {
+  routes = [
+    { path: '/', component: UserListComponent.selector },
+    { path: '/user/add', component: UserFormComponent.selector },
+    { path: '/user/edit/:user', component: UserFormComponent.selector },
+  ];
 
   constructor() {
     super();
@@ -28,11 +33,7 @@ class AppComponent extends HTMLElement {
       const outlet = this.shadowRoot.getElementById('outlet');
       const router = new Vaadin.Router(outlet);
 
-      router.setRoutes([
-        { path: '/', component: UserListComponent.selector },
-        { path: '/user/add', component: UserFormComponent.selector },
-        { path: '/user/edit/:user', component: UserFormComponent.selector },
-      ]);
+      router.setRoutes(this.routes);
     });
   }
 

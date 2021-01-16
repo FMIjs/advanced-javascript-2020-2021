@@ -7,6 +7,15 @@ import { nextTick, createComponent, stopPropagationHandlerFactory } from "./util
 import { fromEvent, of, from, Subscription, BehaviorSubject, asyncScheduler, interval, merge, combineLatest } from 'rxjs';
 import { debounceTime, delay, map, mapTo, mergeMap, shareReplay, startWith, switchMap, tap } from "rxjs/operators";
 
+// const original = history.pushState;
+
+// history.pushState = function(...args) {
+//   window.location.pathname
+//   original.call(this, ...args);
+//   const instance = document.querySelector(selector)
+//   instance.state = {};
+// }
+
 function runTest() {
   const data = Array.from({​​​​​length: 100}​​​​​, () => Math.floor(Math.random() * 40));
   const source$ = interval(1000).pipe(
@@ -40,11 +49,20 @@ export class AppComponent extends LitElement {
 
   subscription = new Subscription();
 
+  router = {
+    '/': 'HOME',
+    '/about': 'ABOUT'
+  }
+
+  content!: string;
+
   private _selectedUser = new BehaviorSubject<null | IUser>(null);
   selectedUser$ = this._selectedUser.asObservable();
 
   connectedCallback() {
     super.connectedCallback();
+
+    this.navigateTo(window.location.pathname);
 
     document.addEventListener('click', this.documentClickHandler);
 
@@ -82,6 +100,18 @@ export class AppComponent extends LitElement {
     this._selectedUser.next(null);
   }
 
+  navigateTo = (path: string) => {
+    this.content = (this.router as any)[path];
+    history.pushState(null, '', path);
+  }
+
+  componentClickHandler(e: MouseEvent) {
+    if((e.target as HTMLElement)?.tagName === 'A') { 
+      e.preventDefault(); 
+      this.navigateTo((e.target as HTMLAnchorElement).pathname);
+    }
+  } 
+
   loadUsers(search?: string): Promise<IUser[]> {
     let url = `${APIUrl}/users`;
     if (search) { url += `?name_like=${search}`; }
@@ -114,6 +144,12 @@ export class AppComponent extends LitElement {
       ` : '';
 
     return html`
+    <div @click=${this.componentClickHandler}>
+      <nav>
+        <a href="/" is="router-nav">HOME</a>
+        <a href="/about" is="router-nav">ABOUT</a>
+      </nav>
+      ${this.content}
       <div>RXJS/TS/Webpack (TS -> ES6)</div>
       <div>${createComponent(ClockComponent)}</div>
       <div>
@@ -127,6 +163,7 @@ export class AppComponent extends LitElement {
       </ul>`}
       <div>Selected user: ${this.selectedUser?.name || 'none'}</div>
       ${userPosts}
+    </div>
     `;
   }
 
