@@ -1,3 +1,5 @@
 .hidden
 node_modules
 dist
+yarn.lock
+package-lock.json
