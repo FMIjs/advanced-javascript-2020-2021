@@ -81,3 +81,11 @@ app.get('/', function (req, res) {
 });
 
 app.listen(8080, () => { console.log('server is listening on :8080') })
+
+
+interface IUser {
+  name: string;
+  age: number;
+}
+const user: IUser = {} as IUser;
+Object
