@@ -24,4 +24,4 @@ app.use(function (err, _, res) {
   res.status(500).send('SERVER ERROR');
 });
 
-db.connect().then(() => app.listen(port, () => console.log(`Server is listening on :${port}`)));
+app.listen(port, () => console.log(`Server is listening on :${port}`))
