@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const api = require('./api');
-const db = require('./db');
 
 const port = 3000;
 const app = express();
